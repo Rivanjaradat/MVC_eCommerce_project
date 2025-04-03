@@ -40,6 +40,10 @@ namespace MVC_eCommerce_project
             app.UseRouting();
 
             app.UseAuthorization();
+           app.MapControllerRoute(
+           name: "Dashboard",
+           pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+         );
 
             app.MapControllerRoute(
                 name: "default",
