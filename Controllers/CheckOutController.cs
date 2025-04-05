@@ -69,7 +69,7 @@ namespace MVC_eCommerce_project.Controllers
 
             }
             await context.SaveChangesAsync();
-            return RedirectToAction("Thank you");
+            return RedirectToAction("ThankYou");
 
         }
         public IActionResult ThankYou()

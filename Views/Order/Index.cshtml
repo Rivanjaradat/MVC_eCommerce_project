@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<Order>
+
+@{
     ViewData["Title"] = "Order List";
 }
 
@@ -7,31 +9,50 @@
 <div class="container py-5">
     <h2 class="mb-4 text-primary">Order List</h2>
 
-    <div class="table-responsive shadow-sm rounded">
-        <table class="table table-striped table-hover align-middle">
-            <thead class="table-primary">
+    <div class="table-responsive shadow rounded">
+        <table class="table table-hover align-middle table-bordered">
+            <thead class="table-light">
                 <tr>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Customer Name</th>
-                    <th scope="col">Order Date</th>
-                    <th scope="col">Total Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th>Order ID</th>
+                    <th>Customer Name</th>
+                    <th>Order Date</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- مثال على صف -->
-                <tr>
-                    <td>1001</td>
-                    <td>Ahmad Salim</td>
-                    <td>2025-04-03</td>
-                    <td>$150.00</td>
-                    <td><span class="badge bg-success">Completed</span></td>
-                    <td>
-                        <a href="#" class="btn btn-sm btn-outline-primary">View</a>
-                    </td>
-                </tr>
-                <!-- تقدرِِ تبدلي هاد الصف بـ foreach تجيب الطلبات من المودل -->
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.Id</td>
+                            <td>@order.User?.UserName</td>
+                            <td>@order.CreatedAt.ToString("yyyy-MM-dd")</td>
+                            <td>$@order.Amount.ToString("F2")</td>
+                            <td>
+                                <span class="badge
+                                    @(order.Status == "Completed" ? "bg-success" :
+                                      order.Status == "Pending" ? "bg-warning text-dark" :
+                                      "bg-secondary")">
+                                    @order.Status
+                                </span>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-sm btn-outline-primary">
+                                    View
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No orders found.</td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
