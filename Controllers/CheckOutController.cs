@@ -62,7 +62,9 @@ namespace MVC_eCommerce_project.Controllers
                 {
                     OrderId = order.Id,
                     ProductId = item.ProductId,
-                   
+                    Price = item.Product.Price,
+                    Qty = item.Qty,
+
                 };
                 context.Add(orderProduct);
               

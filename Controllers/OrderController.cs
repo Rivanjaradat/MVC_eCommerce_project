@@ -18,11 +18,23 @@ namespace MVC_eCommerce_project.Controllers
                 .ToListAsync();
             return View(orders);
         }
-        public async Task< IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
-            var order = await _context.Orders .FirstOrDefaultAsync(o => o.Id == id);
-            return View(order);
+            var order = _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.Address)
+                .Include(o => o.orderProducts)
+                    .ThenInclude(op => op.Product)
+                .FirstOrDefault(o => o.Id == id);
+
+            if (order == null)
+                return NotFound();
+
+            return View(order); // ✅ مش List<Order>
         }
+
+
+
 
     }
 }
