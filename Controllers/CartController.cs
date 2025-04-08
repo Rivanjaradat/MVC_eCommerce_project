@@ -11,9 +11,9 @@ namespace MVC_eCommerce_project.Controllers
     public class CartController : Controller
     {
         private readonly ApplicationDbContext context;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CartController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CartController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.userManager = userManager;

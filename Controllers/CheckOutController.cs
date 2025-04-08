@@ -9,9 +9,9 @@ namespace MVC_eCommerce_project.Controllers
     public class CheckOutController : Controller
     {
         private readonly ApplicationDbContext context;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public CheckOutController (ApplicationDbContext context,UserManager <IdentityUser> userManager)
+        public CheckOutController (ApplicationDbContext context,UserManager <ApplicationUser> userManager)
         {
             this.context = context;
             this.userManager = userManager;

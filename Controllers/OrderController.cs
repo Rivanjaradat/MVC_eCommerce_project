@@ -30,7 +30,7 @@ namespace MVC_eCommerce_project.Controllers
             if (order == null)
                 return NotFound();
 
-            return View(order); // ✅ مش List<Order>
+            return View(order);
         }
 
 
