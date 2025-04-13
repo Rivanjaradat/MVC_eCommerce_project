@@ -23,6 +23,11 @@ namespace MVC_eCommerce_project.Areas.Identity.Pages.Account.Manage
             _signInManager = signInManager;
         }
 
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+        [Display(Name = "User Name")]
         public string Username { get; set; }
 
         [TempData]
@@ -44,6 +49,8 @@ namespace MVC_eCommerce_project.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
+            FirstName = user.FirstName;
+            LastName = user.LastName;
 
             Input = new InputModel
             {
