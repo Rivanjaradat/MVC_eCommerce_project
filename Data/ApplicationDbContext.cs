@@ -16,6 +16,7 @@ namespace MVC_eCommerce_project.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> orderProducts { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
     }
 }
