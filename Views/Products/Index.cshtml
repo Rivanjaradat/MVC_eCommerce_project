@@ -4,15 +4,31 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">All product </h1>
-                <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+                <h1 class="display-4 fw-bolder"> @ViewBag.Title </h1>
+               
             </div>
         </div>
     </header>
 }
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
+        <form  asp-action ="Index" method="get"class="row gx-3 gy-2 align-items-center justify-content-center" >
+            <div class="col-sm-3">
+                <label class="visually-hidden " for="category">category</label>
+                <select name="categoryId" class="form-select" id="category" asp-items="@ViewBag.Categories">
+                    <option selected value="">select category</option>
+
+                </select>
+            </div>
+            <div class="col-auto">
+               
+               
+                <button type="submit" class="btn btn-primary ">Submit</button>
+            </div>
+          
+        </form> 
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
             @foreach (var product in Model)
             {
                 <div class="col mb-5">

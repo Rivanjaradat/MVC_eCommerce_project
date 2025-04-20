@@ -26,10 +26,12 @@ namespace MVC_eCommerce_project.Controllers
             var sliderImages = await _context.SliderImages
                 .OrderBy(s => s.SortOrder).
                 ToListAsync();
+             var categories = await _context.Categories.ToListAsync();
             var model = new HomeViewModel
             {
                 Products = products,
-                SliderImages = sliderImages 
+                SliderImages = sliderImages ,
+                Categories = categories
 
             };
             return View(model);

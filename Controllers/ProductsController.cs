@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MVC_eCommerce_project.Data;
 using System.Security.Policy;
@@ -14,10 +15,31 @@ namespace MVC_eCommerce_project.Controllers
           
             this.context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int ? categoryId)
         {
-            var product = await context.Products.ToListAsync();
-            return View(product);
+            var title = "All product";
+
+
+            var products =  context.Products.AsQueryable();
+              
+            if (categoryId != null)
+            {
+                products = context.Products
+                       .Where(p => p.CategoryId == categoryId)
+                       ;
+                var category = await context.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+                if (category != null)
+                {
+                    title = $"{category.Name}s";
+                }
+            }
+            var categories = await context.Categories.ToListAsync();
+            ViewBag.Categories = new SelectList( categories, "Id", "Name",categoryId);
+            ViewBag.Title = title;
+
+            var data = await products.ToListAsync();
+
+            return View(data);
         }
         public async Task< IActionResult> Details(int id)
         {
@@ -28,6 +50,14 @@ namespace MVC_eCommerce_project.Controllers
             }
 
             return View(product);
+        }
+        public async Task<IActionResult> ProductsByCategory(int categoryId)
+        {
+            var products = await context.Products
+                .Where(p => p.CategoryId == categoryId)
+                .ToListAsync();
+
+            return View();
         }
     }
 }
