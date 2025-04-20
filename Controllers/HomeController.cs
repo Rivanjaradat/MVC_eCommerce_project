@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_eCommerce_project.Data;
@@ -22,9 +23,14 @@ namespace MVC_eCommerce_project.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _context.Products.ToListAsync();
+            var sliderImages = await _context.SliderImages
+                .OrderBy(s => s.SortOrder).
+                ToListAsync();
             var model = new HomeViewModel
             {
-                Products = products
+                Products = products,
+                SliderImages = sliderImages 
+
             };
             return View(model);
         }
