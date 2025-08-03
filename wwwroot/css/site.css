@@ -1,23 +1,165 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Harmattan:wght@400;500;600;700&display=swap');
 html {
-  font-size: 14px;
+    font-size: 14px;
+    font-family: "Reem Kufi", sans-serif;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
+}
+
+a.navbar-brand {
+    font-family: "Pacifico", cursive;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+
+  
+
+}
+.ads {
+    background-color: #3F7D58;
+    color: #721c24;
+    border-color: #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+    .ads a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 18px;
+    }
+    /* category section css*/
+.card-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:200px;
+    height: 200px;
+    gap:20px;
+}
+
+.imgBx {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+    .imgBx img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+.details h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+ 
+}
+body {
+    font-family: "Harmattan", sans-serif;
+}
+
+
+    @media (max-width: 768px) {
+        .card-category {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            gap: 10px;
+          
+        }
+
+        .imgBx {
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin-right: 0; 
+        }
+
+            .imgBx img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .details h2 {
+            font-size: 12px;
+            text-align: center;
+        }
+        .card-candle {
+            height: 150px;
+        }
+
+            .card-candle img {
+                height: 60%;
+            }
+
+            .card-candle h5 {
+                font-size: 0.9rem;
+            }
+
+            .card-candle span {
+                font-size: 0.8rem;
+            }
+
+            .card-candle .btn {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+            }
+    
+            .navbar-nav {
+                text-align: center;
+            }
+
+            .navbar-toggler {
+                border-color: transparent;
+            }
+
+            .navbar-toggler-icon {
+                background-color: #28a745;
+            }
+        
+    }
+
+
+
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-direction: row;
+}
+
+.card-candle {
+    height: 370px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

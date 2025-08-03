@@ -15,5 +15,15 @@ namespace MVC_eCommerce_project.Models
         [DisplayName("Category")]
         public int? CategoryId { get; set; }
         public Category Category { get; set; }
+        public int Quantity { get; set; }
+        public int? Discount { get; set; }
+        public string? Size { get; set; }
+       
+        public  DateTime CreatedAt { get; set; } = DateTime.Now;
+        public bool IsAvailable { get; set; } = true;
+        public int? SmellId { get; set; }
+        public Smell Smells { get; set; }
+
+
     }
 }

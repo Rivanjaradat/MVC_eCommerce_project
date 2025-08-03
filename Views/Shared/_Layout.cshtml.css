@@ -2,52 +2,127 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 
-
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
-    font-family: "Pacifico", cursive;
-    font-weight: 400;
-    font-style: normal;
+    font-family: "Playwrite MX Guides", cursive;
 }
 
 a {
-  color: #0077cc;
+    color: #0077cc;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.icon {
+    display: flex;
+    gap: 20px; /* مسافة بين العناصر */
+    align-items: center;
+    margin: 0 30px; /* مسافة من اليمين واليسار */
+}
+
+    .icon .item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 16px;
+    }
+
+    .icon i {
+        color: #000;
+        font-size: 18px;
+    }
+
+    .icon a {
+        color: #000;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+        .icon a:hover {
+            color: #1b6ec2; /* لون عند التمرير */
+        }
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    height: 50px;
+    border-radius: 30px;
+    padding-left: 35px;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #888;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+.footer-link {
+    color: #ccc;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    transition: 0.3s;
 }
+
+    .footer-link:hover {
+        color: #fff;
+        padding-right: 5px;
+    }
+
+.social-icon {
+    color: #fff;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+    .social-icon:hover {
+        background-color: #f5a623;
+        color: #000;
+    }

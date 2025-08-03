@@ -5,8 +5,9 @@ namespace MVC_eCommerce_project.Models
     public class SliderImage
     {
         public int Id { get; set; }
-        public string Image { get; set; }
-        [DisplayName(" Sort order")]
-        public int SortOrder { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string? Image { get; set; }
+
     }
 }

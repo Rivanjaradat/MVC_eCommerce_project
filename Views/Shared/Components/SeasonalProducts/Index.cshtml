@@ -1,0 +1,26 @@
+﻿<div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 g-4 ">
+
+    @foreach (var product in Model)
+    {
+        <div class="col">
+            <div class="card-candle shadow rounded-3">
+                <!-- الصورة -->
+                <img class="card-img-top" src="@product.Image" alt="@product.Name" style="height: 70%; object-fit: cover;">
+
+                <!-- تفاصيل المنتج -->
+                <div class="card-body p-2 d-flex flex-column justify-content-between" style="height: 30%;">
+                    <div class="text-center mt-2">
+                        <h5 class="fw-bold">@product.Name</h5>
+                        <span class="text-success fw-semibold">$@product.Price</span>
+                    </div>
+                    <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center">
+                            <a asp-action="Details" asp-route-Id="@product.Id" asp-controller="Products" class="btn btn-outline-dark btn-sm mt-1">تفاصيل</a>
+                            <a asp-action="AddToCart" asp-route-productId="@product.Id" asp-controller="Cart" class="btn btn-outline-dark btn-sm mt-1">أضف إلى السلة</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -23,10 +23,8 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         // GET: Dashboard/Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products
-
-                .Include(p => p.Category)
-                .ToListAsync());
+            var applicationDbContext = _context.Products.Include(p => p.Category).Include(p => p.Smells);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Dashboard/Products/Details/5
@@ -38,6 +36,8 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Smells)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {
@@ -50,19 +50,23 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         // GET: Dashboard/Products/Create
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["SmellId"] = new SelectList(_context.Smells, "Id", "Name");
             return View();
         }
 
-       
+        // POST: Dashboard/Products/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Product product,IFormFile Image)
+        public async Task<IActionResult> Create( Product product, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
                 if (Image == null)
                 {
-                    ModelState.AddModelError(nameof(Product.Image),"Image is required");
+                    ModelState.AddModelError(nameof(Product.Image), "Image is required");
                     return View(product);
                 }
                 var ImageName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
@@ -71,7 +75,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
                     Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products"));
                 }
                 var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products", ImageName);
-               await using (var stream = new FileStream(savePath, FileMode.Create))
+                await using (var stream = new FileStream(savePath, FileMode.Create))
                 {
                     await Image.CopyToAsync(stream);
                 }
@@ -80,6 +84,8 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            ViewData["SmellId"] = new SelectList(_context.Smells, "Id", "Name", product.SmellId);
             return View(product);
         }
 
@@ -96,8 +102,8 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             {
                 return NotFound();
             }
-            var categories = await _context.Categories.ToArrayAsync();
-            ViewBag.Categories = new SelectList(categories, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            ViewData["SmellId"] = new SelectList(_context.Smells, "Id", "Name", product.SmellId);
             return View(product);
         }
 
@@ -106,7 +112,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,  Product product, IFormFile Image)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Image,Price,CategoryId,Quantity,Discount,Size,CreatedAt,IsAvailable,SmellId")] Product product)
         {
             if (id != product.Id)
             {
@@ -117,27 +123,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             {
                 try
                 {
-                    var oldProduct = await _context.Products.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
-                    if (Image != null)
-                    {
-                        var ImageName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
-                        if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products")))
-                        {
-                            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products"));
-                        }
-                        var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/products", ImageName);
-                        await using (var stream = new FileStream(savePath, FileMode.Create))
-                        {
-                            await Image.CopyToAsync(stream);
-                        }
-                        oldProduct.Image = $"/img/products/{ImageName}";
-                    }
-                    oldProduct.Name = product.Name;
-                    oldProduct.Description = product.Description;
-                    oldProduct.Price = product.Price;
-                    oldProduct.CategoryId = product.CategoryId;
-
-                    _context.Update(oldProduct);
+                    _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -153,6 +139,8 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            ViewData["SmellId"] = new SelectList(_context.Smells, "Id", "Name", product.SmellId);
             return View(product);
         }
 
@@ -165,6 +153,8 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             }
 
             var product = await _context.Products
+                .Include(p => p.Category)
+                .Include(p => p.Smells)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {

@@ -3,11 +3,59 @@
 }
 
 
+@{
+    ViewData["Title"] = "شكراً لطلبك";
+}
 
-    <div class="card">
-        <h2>Thank You for Your Order!</h2>
-        <p>Your order has been successfully placed. We appreciate your business and will get it ready for you soon.</p>
-        <a href="@Url.Action("Index", "Order")" class="btn-return">Return to Orders</a>
-    </div>
+<style>
+    body {
+        direction: rtl;
+        text-align: right;
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
+    .thank-you-card {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        padding: 30px;
+        text-align: center;
+    }
 
+        .thank-you-card h2 {
+            color: #3F7D58;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .thank-you-card p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+    .btn-return {
+        background-color: #3F7D58;
+        color: white;
+        padding: 12px 28px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn-return:hover {
+            background-color: #356c4b;
+            text-decoration: none;
+            color: white;
+        }
+</style>
+
+<div class="thank-you-card">
+    <h2>شكراً لطلبك!</h2>
+    <p>تم إرسال طلبك بنجاح. نقدر ثقتك بنا وسنقوم بتحضيره في أقرب وقت ممكن.</p>
+    <a href="@Url.Action("Index", "Order")" class="btn-return">العودة إلى الطلبات</a>
+</div>

@@ -13,10 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SortOrder)
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
             </th>
             <th></th>
         </tr>
@@ -25,11 +28,14 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                    <img src=" @Html.DisplayFor(modelItem => item.Image)" width="200" />
-               
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SortOrder)
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                    <img src="@item.Image" width="200" />
+               
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

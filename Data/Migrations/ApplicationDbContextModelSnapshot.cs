@@ -52,6 +52,25 @@ namespace MVC_eCommerce_project.Data.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("MVC_eCommerce_project.Models.Ads", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ads");
+                });
+
             modelBuilder.Entity("MVC_eCommerce_project.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -172,6 +191,37 @@ namespace MVC_eCommerce_project.Data.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("MVC_eCommerce_project.Models.FeaturedSection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ButtonLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ButtonText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FeaturedSections");
+                });
+
             modelBuilder.Entity("MVC_eCommerce_project.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -244,11 +294,20 @@ namespace MVC_eCommerce_project.Data.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -257,9 +316,20 @@ namespace MVC_eCommerce_project.Data.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Size")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("SmellId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("SmellId");
 
                     b.ToTable("Products");
                 });
@@ -272,15 +342,35 @@ namespace MVC_eCommerce_project.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("SliderImages");
+                });
+
+            modelBuilder.Entity("MVC_eCommerce_project.Models.Smell", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Smells");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -488,7 +578,13 @@ namespace MVC_eCommerce_project.Data.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CategoryId");
 
+                    b.HasOne("MVC_eCommerce_project.Models.Smell", "Smells")
+                        .WithMany("Products")
+                        .HasForeignKey("SmellId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Smells");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -550,6 +646,11 @@ namespace MVC_eCommerce_project.Data.Migrations
             modelBuilder.Entity("MVC_eCommerce_project.Models.Order", b =>
                 {
                     b.Navigation("orderProducts");
+                });
+
+            modelBuilder.Entity("MVC_eCommerce_project.Models.Smell", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

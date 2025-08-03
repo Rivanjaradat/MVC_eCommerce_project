@@ -43,13 +43,19 @@ namespace MVC_eCommerce_project.Controllers
         }
         public async Task< IActionResult> Details(int id)
         {
-            var product = await context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await context.Products
+    .Include(p => p.Smells)
+    .FirstOrDefaultAsync(p => p.Id == id);
+
             if (product == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Smells = await context.Smells.ToListAsync();
+
             return View(product);
+
         }
         public async Task<IActionResult> ProductsByCategory(int categoryId)
         {
@@ -58,6 +64,17 @@ namespace MVC_eCommerce_project.Controllers
                 .ToListAsync();
 
             return View();
+        }
+        public async Task<IActionResult> ByCategory(int categoryId)
+        {
+            var products = await context.Products
+                .Where(p => p.CategoryId == categoryId)
+                .ToListAsync();
+
+            var category = await context.Categories.FindAsync(categoryId);
+            ViewBag.CategoryName = category?.Name;
+
+            return View(products); // View باسم ByCategory.cshtml
         }
     }
 }

@@ -50,9 +50,11 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             return View();
         }
 
-        // POST: Dashboard/SliderImages/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Fix for the error CS1061: 'SliderImage' does not contain a definition for 'CopyToAsync'  
+        // The issue is that the `CopyToAsync` method is being called on the `sliderImage` object,  
+        // which is of type `SliderImage`. However, `CopyToAsync` is a method of `IFormFile`,  
+        // and the correct object to call it on is the `Image` parameter.  
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SliderImage sliderImage, IFormFile Image)
@@ -61,25 +63,29 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             {
                 if (Image == null)
                 {
-                    ModelState.AddModelError(nameof(SliderImage.Image), "Image is required");
+                    ModelState.AddModelError(nameof(sliderImage.Image), "Image is required");
                     return View(sliderImage);
                 }
+
                 var ImageName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
                 if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/SliderImages")))
                 {
                     Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/SliderImages"));
                 }
+
                 var savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/SliderImages", ImageName);
                 await using (var stream = new FileStream(savePath, FileMode.Create))
                 {
-                    await Image.CopyToAsync(stream);
+                    await Image.CopyToAsync(stream); 
                 }
+
                 sliderImage.Image = $"/img/SliderImages/{ImageName}";
                 _context.Add(sliderImage);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(sliderImage); // Ensure a return statement for all code paths  
+
+            return View(sliderImage);
         }
 
         // GET: Dashboard/SliderImages/Edit/5
@@ -103,7 +109,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Image,SortOrder")] SliderImage sliderImage)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Image")] SliderImage sliderImage)
         {
             if (id != sliderImage.Id)
             {

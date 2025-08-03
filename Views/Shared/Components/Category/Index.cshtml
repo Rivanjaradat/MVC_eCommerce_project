@@ -1,0 +1,16 @@
+﻿@foreach (var category in Model)
+{
+    <div class="card-category">
+        <div class="imgBx">
+            <img src="@category.Image" alt="@category.Name" class="category-img" />
+        </div>
+        <div class="details">
+            <a asp-controller="Products" asp-action="ByCategory" asp-route-categoryId="@category.Id" class="text-decoration-none text-dark fw-bold">
+                @category.Name
+            </a>
+
+
+        </div>
+    </div>
+}
+

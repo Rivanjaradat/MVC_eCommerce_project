@@ -1,63 +1,91 @@
 ﻿@model Address
 
 @{
-    List< Address>addresses = ViewBag.Addresses;
+    List<Address> addresses = ViewBag.Addresses;
 }
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+<style>
+    body {
+        direction: rtl;
+        background-color: #f9f9f9;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h4, h2 {
+        color: #3F7D58;
+        font-weight: bold;
+    }
+
+    .btn-primary {
+        background-color: #3F7D58 !important;
+        border-color: #3F7D58 !important;
+    }
+
+        .btn-primary:hover {
+            background-color: #356c4b !important;
+            border-color: #356c4b !important;
+        }
+
+    .card-title {
+        color: #3F7D58;
+        font-weight: bold;
+    }
+</style>
 
 <div class="container py-5">
 
-    <h4 class="mb-4">Saved Addresses</h4>
+    <h4 class="mb-4">العناوين المحفوظة</h4>
     <div class="row">
         @foreach (var address in addresses)
         {
-            <div class="col-md-4 mb-2">
+            <div class="col-md-4 mb-3">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-body">
                         <h5 class="card-title">@address.User.UserName</h5>
                         <p class="card-text">
-                            @address.AddresssLine,
-                            @address.City, @address.State- @address.PinCode
+                            @address.AddresssLine،
+                            @address.City، @address.State - @address.PinCode
                         </p>
-                        <a asp-action="Confirm" asp-controller="CheckOut" asp-route-addressId="@address.Id" class=" btn btn-primary">Deliver here</a>
+                        <a asp-action="Confirm" asp-controller="CheckOut" asp-route-addressId="@address.Id" class="btn btn-primary">التوصيل إلى هذا العنوان</a>
                     </div>
                 </div>
             </div>
         }
     </div>
 
-    <h2 class="mb-4">Checkout</h2>
-    
+    <h2 class="mb-4">إتمام الطلب</h2>
+
     <div class="card shadow p-4">
         <form asp-action="Index" method="post">
             <div class="mb-3">
-                <label asp-for="AddresssLine" class="form-label">Address Line</label>
-                <input asp-for="AddresssLine" class="form-control" placeholder="e.g. 123 Main St" />
+                <label asp-for="AddresssLine" class="form-label">عنوان الشارع</label>
+                <input asp-for="AddresssLine" class="form-control" placeholder="مثال: شارع 123 الرئيسي" />
                 <span asp-validation-for="AddresssLine" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="City" class="form-label">City</label>
-                <input asp-for="City" class="form-control" placeholder="e.g. Ramallah" />
+                <label asp-for="City" class="form-label">المدينة</label>
+                <input asp-for="City" class="form-control" placeholder="مثال: رام الله" />
                 <span asp-validation-for="City" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="State" class="form-label">State</label>
-                <input asp-for="State" class="form-control" placeholder="e.g. West Bank" />
+                <label asp-for="State" class="form-label">المحافظة / المنطقة</label>
+                <input asp-for="State" class="form-control" placeholder="مثال: الضفة الغربية" />
                 <span asp-validation-for="State" class="text-danger"></span>
             </div>
 
             <div class="mb-3">
-                <label asp-for="PinCode" class="form-label">Postal Code</label>
-                <input asp-for="PinCode" class="form-control" placeholder="e.g. 00970" />
+                <label asp-for="PinCode" class="form-label">الرمز البريدي</label>
+                <input asp-for="PinCode" class="form-control" placeholder="مثال: 00970" />
                 <span asp-validation-for="PinCode" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary w-100 mt-3">
-                <i class="bi bi-credit-card me-2"></i> Place Order
+                <i class="bi bi-credit-card me-2"></i> إتمام الطلب
             </button>
         </form>
     </div>
 </div>
-

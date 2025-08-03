@@ -18,6 +18,9 @@ namespace MVC_eCommerce_project.Data
         public DbSet<OrderProduct> orderProducts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<SliderImage> SliderImages { get; set; }
+        public DbSet<FeaturedSection> FeaturedSections { get; set; }
+        public DbSet<Ads> Ads { get; set; }
+        public DbSet<Smell> Smells { get; set; }
 
     }
 }

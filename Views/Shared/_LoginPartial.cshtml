@@ -9,21 +9,54 @@
         var user = await UserManager.Users.FirstOrDefaultAsync(u => u.UserName == User.Identity.Name);
 
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello !</a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
+            <div class="dropdown">
+                <button class="btn btn-link text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-regular fa-circle-user"></i> <!-- أيقونة بدون خلفية -->
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">حسابي</a></li>
+                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">تسجيل خروج</a></li>
+                    <li><a class="dropdown-item" asp-controller="Order" asp-action="Index">الطلبات</a></li>
+                    <!-- رابط للأوامر -->
+                </ul>
+            </div>
         </li>
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-circle-user"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+            </ul>
+        </div>
     }
 </ul>
+@section styles {
+    /* إزالة الخلفية من الأيقونة */
+.dropdown-toggle {
+    background: transparent !important;
+    border: none; /* إزالة الحدود حول الأيقونة */
+    padding: 0; /* إزالة المسافات حول الأيقونة */
+    font-size: 1.5rem; /* تكبير حجم الأيقونة */
+}
+
+/* تنسيق لقائمة dropdown عند تسجيل الدخول */
+.dropdown-menu {
+    width: 200px;
+    text-align: center;
+}
+
+.dropdown-item {
+    font-weight: 500;
+}
+
+/* تغيير اللون عند مرور الماوس على العنصر */
+.dropdown-item:hover {
+    background-color: #f1f1f1;
+}
+
+}

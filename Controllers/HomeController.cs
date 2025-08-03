@@ -22,15 +22,26 @@ namespace MVC_eCommerce_project.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _context.Products.ToListAsync();
-            var sliderImages = await _context.SliderImages
-                .OrderBy(s => s.SortOrder).
-                ToListAsync();
-             var categories = await _context.Categories.ToListAsync();
+          
+            // get 6 products from the database
+            var products = await _context.Products
+                .Include(p => p.Category)
+               
+                .Take(8)
+                .ToListAsync();
+
+            var categories = await _context.Categories.ToListAsync();
+            var sliderImages = await _context.SliderImages.ToListAsync();
+            var fearuredSection = await _context.FeaturedSections.FirstOrDefaultAsync(a => a.IsActive == true);
+           var ads=await _context.Ads.FirstOrDefaultAsync(a => a.IsActive == true);
             var model = new HomeViewModel
             {
                 Products = products,
-                SliderImages = sliderImages ,
+                SliderImages = sliderImages,
+                FeaturedSections =fearuredSection,
+                
+
+
                 Categories = categories
 
             };

@@ -4,136 +4,287 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*@section PageTitle  {
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Home Page</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-        </div>
-    </div>
-</header>
-}*@
-<!-- Slider main container -->
-<div class="swiper">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-        <!-- Slides -->
-        @foreach (var slider in Model.SliderImages)
-        {
-            <div class="swiper-slide">
-                <img src="@slider.Image" alt="Slider Image" />
-            </div>
-        })
-        
-       
-    </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
+<!-- Bootstrap Carousel -->
+<div class="  background-slider">
 
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <div id=" template-mo-zay-hero-carousel" class="carousel slide " data-bs-ride="carousel" data-bs-interval="5000">
 
-    <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div>
-</div>
-
-<!-- Section-->
-<section class="py-5">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            @foreach (var category in Model.Categories)
+        <div class="carousel-indicators">
+            @for (int i = 0; i < Model.SliderImages.Count; i++)
             {
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        @*  <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>*@
-                        <!-- Product image-->
-                        <img class="card-img-top" src="@category.Image" alt="@category.Name" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">@category.Name</h5>
+                <button type="button" data-bs-target="#template-mo-zay-hero-carousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")" aria-label="Slide @(i+1)"></button>
+            }
+        </div>
+
+        <div class="carousel-inner">
+            @for (int i = 0; i < Model.SliderImages.Count; i++)
+            {
+                var item = Model.SliderImages[i];
+                <div class="carousel-item @(i == 0 ? "active" : "")">
+                    <div class="container">
+                        <div class="row p-5">
+                            <div class="mx-auto col-md-8 col-lg-6 order-lg-last">
+                                <img class="img-fluid image " src="@item.Image" alt="">
                             </div>
-                        </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center">
-                                <a asp-action="Index" asp-route-categoryId="@category.Id" asp-controller="Products" class="btn btn-outline-dark mt-auto">View Products</a>
+                            <div class="col-lg-6 mb-0 d-flex align-items-center">
+                                <div class="text-align-left align-self-center">
+                                    <h1 class="h1 text-success text-center">@item.Title</h1>
+                                    <p class="text-center">@item.Description</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-            </div>
+        </div>
 
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-           @foreach(var product in Model.Products){
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Sale badge-->
-                        @*  <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>*@
-                        <!-- Product image-->
-                        <img class="card-img-top"  width ="200" hight="200"src="@product.Image" alt="@product.Name" />
-                        <!-- Product details-->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product name-->
-                                <h5 class="fw-bolder">@product.Name</h5>
-                                <!-- Product price-->
-                                @* <span class="text-muted text-decoration-line-through">$@product.Price</span>*@ 
-                                $@product.Price
-                            </div>
+    </div>
+
+    </div>
+<section >
+   
+        <div class="hr-text-wrapper text-center mb-5 mt-lg-5">
+    <span class="hr-text title">أقسامنا</span>
+</div>
+    <div class="box mb-5 container">
+
+        @await Component.InvokeAsync("Category")
+
+    </div>
+</section>
+
+
+
+<!-- Section -->
+
+       <div class="hr-text-wrapper text-center mb-5 mt-lg-5">
+    <span class="hr-text title">شموع مميزة </span>
+</div>
+<section class="mb-4 container  ">
+ 
+    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-3 row-cols-lg-4 g-4 ">
+
+        @foreach (var product in Model.Products)
+        {
+            <div class="col">
+                <div class="card-candle shadow rounded-3">
+                    <!-- الصورة -->
+                    <img class="card-img-top" src="@product.Image" alt="@product.Name" style="height: 70%; object-fit: cover;">
+
+                    <!-- تفاصيل المنتج -->
+                    <div class="card-body p-2 d-flex flex-column justify-content-between" style="height: 30%;">
+                        <div class="text-center mt-2">
+                            <h5 class="fw-bold">@product.Name</h5>
+                            <span class="text-success fw-semibold">$@product.Price</span>
                         </div>
-                        <!-- Product actions-->
-                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
                             <div class="text-center">
-                                <a asp-action="AddToCart" asp-route-productId="@product.Id" asp-controller="Cart" class="btn btn-outline-dark mt-auto" >Add to cart</a>
-                                </div>
+                                <a asp-action="Details" asp-route-Id="@product.Id" asp-controller="Products" class="btn btn-outline-dark btn-sm mt-1">تفاصيل</a>
+                                <a asp-action="AddToCart" asp-route-productId="@product.Id" asp-controller="Cart" class="btn btn-outline-dark btn-sm mt-1">أضف إلى السلة</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-           }
-         
-           
+            </div>
+        }
+    </div>
+</section>
+
+<hr class="mb-5 mt-5" />
+<section class="mb-5 container text-center">
+    <div class="row justify-content-center gap-4">
+        <div class="col-12 col-md-3 service-item">
+            <div class="icon-circle mb-2">
+                <i class="fa-solid fa-truck fa-2x"></i>
+            </div>
+            <h5 class="fw-bold">توصيل إلى جميع المحافظات</h5>
+        </div>
+        <div class="col-12 col-md-3 service-item">
+            <div class="icon-circle mb-2">
+                <i class="fa-solid fa-coins fa-2x"></i>
+            </div>
+            <h5 class="fw-bold">دفع عند الاستلام</h5>
+        </div>
+        <div class="col-12 col-md-3 service-item">
+            <div class="icon-circle mb-2">
+                <i class="fa-solid fa-clock fa-2x"></i>
+            </div>
+            <h5 class="fw-bold">وصول الطلب بعد يومين</h5>
         </div>
     </div>
 </section>
+<!-- قسم الشموع الموسمية  -->
+   <div class="hr-text-wrapper text-center mb-5 mt-lg-5">
+    <span class="hr-text title">شموع موسمية</span>
+</div>
+<section class="mb-4 container  ">
+ 
+
+       @await Component.InvokeAsync("SeasonalProducts")
+ 
+</section>
+
+<div class="hr-text-wrapper text-center mb-5 mt-lg-5">
+    <span class="hr-text title">@Model.FeaturedSections.Title</span>
+</div>
+
+<section class="featured-wrapper mb-5 mt-5">
+    <div class="container">
+        <div class="featured-section  ">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="@Model.FeaturedSections.Image" alt="@Model.FeaturedSections.Title" class="img-fluid rounded shadow" />
+            </div>
+            <div class="col-lg-6 text-center text-lg-start">
+               
+                <p class="featured-description text-center">@Model.FeaturedSections.Description</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
 @section Styles {
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-}
-@section Scripts {
-   
+    <style>
+      
+      
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-                const swiper = new Swiper('.swiper', {
-          // Optional parameters
-        
-          loop: true,
+        .image {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+           
+            transition: transform 0.2s;
+        }
 
-          // If we need pagination
-          pagination: {
-            el: '.swiper-pagination',
-          },
-
-          // Navigation arrows
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-
-          // And if we need scrollbar
-          scrollbar: {
-            el: '.swiper-scrollbar',
-          },
-        });
-     
-    </script>
+        .fixed-img {
+            height: 200px;
             
-        
+            object-fit: cover;
+        }
+
+        .transition-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 1rem;
+        }
+
+            .transition-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            }
+
+        .transition-img {
+            transition: transform 0.4s ease;
+        }
+
+        .transition-card:hover .transition-img {
+            transform: scale(1.05);
+        }
+
+        .featured-wrapper {
+            background: linear-gradient(to right, #F5F5DC, #CFC6B8);
+            width: 100%;
+            border-radius: 2rem;
+            padding: 60px 0;
+        }
+
+        .featured-section {
+            gap: 2rem;
+            padding: 20px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .featured-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #4E342E; /* بني داكن */
+            margin-bottom: 20px;
+        }
+
+        .featured-description {
+            font-size: 1.2rem;
+            color: #6D4C41; /* بني متوسط */
+            line-height: 1.6;
+            width:100%;
+            margin: 0 auto;
+            text-align: justify;
+            
+        }
+
+        /* صورة مميزة */
+        .featured-section img {
+            border-radius: 1rem;
+            max-height: 400px;
+            object-fit: cover;
+            width: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .background-slider {
+            background: linear-gradient(to right, #F5F5DC, #CFC6B8);
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            top:0;
+        }
+
+        .hr-text-wrapper {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.hr-text-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #ccc;
+    z-index: 1;
+}
+
+.hr-text {
+    background: #fff;
+    padding: 0 20px;
+    font-weight: bold;
+    position: relative;
+    z-index: 2;
+    color: #333;
+}
+
+.title{
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4E342E; /* بني داكن */
+    margin-bottom: 20px;
+}
+
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border: 2px dashed #333; /* خطوط مقطعة */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transition: 0.3s;
+        }
+
+        .service-item:hover .icon-circle {
+            background-color: #f8f9fa;
+            border-color: #000;
+        }
+
+    </style>
+  
 }

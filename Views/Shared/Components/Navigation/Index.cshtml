@@ -1,49 +1,95 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container px-4 px-lg-5">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+﻿<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm border-bottom " dir="rtl">
+    <div class="container justify-content-between g-4">
+    
+
+        <!-- زر القائمة المنسدلة للأجهزة الصغيرة -->
+        <button class="navbar-toggler order-md-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- الكارت و تسجيل الدخول -->
-            <form asp-controller="Cart" asp-action="Index" class="d-flex me-2">
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart (
-                    @if (Model.Cart != null)
-                    {
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">@Model.Cart.Count</span>
-                    }
-                    else
-                    {
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    })
-                </button>
-            </form>
-
-            <partial name="_LoginPartial" />
-          
-
-       
-            <a class="navbar-brand mx-auto" asp-controller="Home" asp-action="Index" >Reev Candle</a>
-        
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" asp-controller="Home" asp-action="Index">Home</a></li>
-                <li class="nav-item"><a class="nav-link" asp-controller="Products" asp-action="Index">All Products</a></li>
+        <!-- روابط القائمة الرئيسية -->
+        <div class="collapse navbar-collapse order-md-1" id="navbarNav">
+            <ul class="navbar-nav main-nav">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Index", "Home")">الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("OurCandles", "Home")">شموعنا</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="@Url.Action("Categories", "Home")">الأقسام</a>
+                </li>
             </ul>
-          
+        </div>
+
+        <!-- العناصر على اليسار: سلة التسوق، المفضلة، تسجيل الدخول -->
+        <div class="d-flex align-items-center gap-4 order-md-3">
+            <div class="item d-flex align-items-center">
+                <form asp-controller="Cart" asp-action="Index" class="d-flex">
+                    <button class="btn btn-link p-0 text-decoration-none text-dark" type="submit">
+                        (
+                        @if (Model.Cart != null)
+                        {
+                            <span class="badge bg-transparent text-dark ms-1">@Model.Cart.Count</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-transparent text-dark ms-1">0</span>
+                        })
+                    </button>
+                </form>
+                <i class="fa-solid fa-cart-shopping me-1 text-success"></i>
+            </div>
+            <div class="item d-flex align-items-center">
+                <i class="fa-solid fa-heart me-1 text-danger"></i>
+                <a href="#" class="text-decoration-none text-dark">(0)</a>
+            </div>
+          @* <div class="item">
+                <partial name="_LoginPartial" />
+            </div>*@ 
         </div>
     </div>
 </nav>
-@section Styles{
-    <style>
-        .navbar-brand {
-            font-family: 'Lobster', cursive;
-            font-weight: 400;
-            font-style: normal;
-            background-color: aqua !important;
-            ;
+
+<style>
+    /* تنسيق القائمة الرئيسية */
+    .navbar-nav.main-nav {
+        display: flex;
+        gap: 30px; /* مسافة أكبر بين الأقسام */
+    }
+
+    .nav-item {
+        list-style: none;
+        position: relative;
+    }
+
+    .nav-link {
+        font-weight: bold;
+        text-align: center;
+        padding: 8px 0;
+        position: relative;
+    }
+
+        .nav-link:hover {
+            color: #28a745 !important; /* لون التمييز عند المرور */
         }
-    </style>
-}
+
+        /* إضافة خط تحت القسم عند المرور عليه */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #28a745;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+    
+</style>

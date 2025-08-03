@@ -1,90 +1,170 @@
 ﻿@model Product
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet" />
 
 @section PageTitle {
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Product Details</h1>
-                <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
-            </div>
+    <header class="bg-gradient py-5 text-end justify-content-center align-items-center" style="background: linear-gradient(to left, #ffecd2 0%, #fcb69f 100%); direction: rtl;">
+        <div class="container text-dark">
+            <h1 class="display-4 fw-bold">تفاصيل المنتج</h1>
+            <p class="lead">اكتشف المزيد عن هذا المنتج الرائع</p>
         </div>
     </header>
 }
-<div class="container mt-5">
-    <div class="row">
-        <!-- Product Images -->
-        <div class="col-md-6 mb-4">
-            <img src="@Model.Image" alt="Product" class="img-fluid rounded mb-3 product-image" id="mainImage">
-          @* <div class="d-flex justify-content-between">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Thumbnail 1" class="thumbnail rounded active" onclick="changeImage(event, this.src)">
-                <img src="https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Thumbnail 2" class="thumbnail rounded" onclick="changeImage(event, this.src)">
-                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Thumbnail 3" class="thumbnail rounded" onclick="changeImage(event, this.src)">
-                <img src="https://images.unsplash.com/photo-1528148343865-51218c4a13e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwzfHxoZWFkcGhvbmV8ZW58MHwwfHx8MTcyMTMwMzY5MHww&ixlib=rb-4.0.3&q=80&w=1080" alt="Thumbnail 4" class="thumbnail rounded" onclick="changeImage(event, this.src)">
-            </div>*@ 
+
+<style>
+    body {
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .product-image {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transition: transform 0.4s ease;
+    }
+
+        .product-image:hover {
+            transform: scale(1.03);
+        }
+
+    .price-tag {
+        font-size: 2rem;
+        color: #3F7D58;
+        font-weight: bold;
+    }
+
+    .striked {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background: #3F7D58;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background: linear-gradient(to right, #F5F5DC, #CFC6B8);
+        }
+
+    .btn-outline-secondary:hover {
+        background-color: #ff9800;
+        color: white;
+        border-color: #ff9800;
+    }
+
+    .smell-card {
+        border: 2px solid #eee;
+        border-radius: 10px;
+        padding: 10px 15px;
+        margin: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .smell-card:hover,
+        .btn-check:checked + .smell-card {
+            background-color: #fff3e0;
+            border-color: #ff9800;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+    .feature-list li::before {
+        content: "✓ ";
+        color: #4caf50;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+    .form-control:focus {
+        border-color: #ff9800;
+        box-shadow: 0 0 0 0.25rem rgba(255, 152, 0, 0.25);
+    }
+</style>
+
+<div class="container my-2">
+    <div class="row g-5">
+        <!-- الصورة -->
+        <div class="col-lg-6">
+            <img src="@Model.Image" alt="@Model.Name" class="product-image mb-3" id="mainImage" />
         </div>
 
-        <!-- Product Details -->
-        <div class="col-md-6">
-            <h2 class="mb-3">@Model.Name</h2>
-            
-            <div class="mb-3">
-                <span class="h4 me-2">$@Model.Price</span>
-                <span class="text-muted"><s>$399.99</s></span>
+        <!-- التفاصيل -->
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-3">@Model.Name</h2>
+
+            <div class="mb-3 d-flex align-items-center gap-3">
+                <span class="price-tag">$@Model.Price</span>
+                @*   <span class="striked">$399.99</span>*@
             </div>
-            <div class="mb-3">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-half text-warning"></i>
-                <span class="ms-2">4.5 (120 reviews)</span>
-            </div>
-            <p class="mb-4">
-              @Model.Description
-            </p>
-            <div class="mb-4">
-                <h5>Color:</h5>
-                <div class="btn-group" role="group" aria-label="Color selection">
-                    <input type="radio" class="btn-check" name="color" id="black" autocomplete="off" checked>
-                    <label class="btn btn-outline-dark" for="black">Black</label>
-                    <input type="radio" class="btn-check" name="color" id="silver" autocomplete="off">
-                    <label class="btn btn-outline-secondary" for="silver">Silver</label>
-                    <input type="radio" class="btn-check" name="color" id="blue" autocomplete="off">
-                    <label class="btn btn-outline-primary" for="blue">Blue</label>
+
+            <p class="text-muted mb-4">@Model.Description</p>
+
+            <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                <input type="hidden" name="productId" value="@Model.Id" />
+                <input type="hidden" name="quantity" id="formQuantity" />
+                <input type="hidden" name="smellId" id="formSmellId" />
+
+                <div class="mb-4">
+                    <h6 class="fw-semibold mb-2">اختر الرائحة:</h6>
+                    <div class="d-flex flex-wrap justify-content-start">
+                        @foreach (var smell in ViewBag.Smells as List<Smell>)
+                        {
+                            var smellId = $"smell_{smell.Id}";
+                            <input type="radio" class="btn-check" name="smell" id="@smellId" value="@smell.Id" autocomplete="off" />
+                            <label class="smell-card" for="@smellId">@smell.Name</label>
+                        }
+                    </div>
                 </div>
-            </div>
-            <div class="mb-4">
-                <label for="quantity" class="form-label">Quantity:</label>
-                <input type="number" class="form-control" id="quantity" value="1" min="1" style="width: 80px;">
-            </div>
-            <button class="btn btn-primary btn-lg mb-3 me-2" >
-                <i class="bi bi-cart-plus"></i>
-                <a asp-action="AddToCart" asp-route-productId="@Model.Id" asp-controller="Cart"> Add to Cart</a>
-               
-            </button>
-            <button class="btn btn-outline-secondary btn-lg mb-3">
-                <i class="bi bi-heart"></i> Add to Wishlist
-            </button>
-            <div class="mt-4">
-                <h5>Key Features:</h5>
-                <ul>
-                    <li>Industry-leading noise cancellation</li>
-                    <li>30-hour battery life</li>
-                    <li>Touch sensor controls</li>
-                    <li>Speak-to-chat technology</li>
+
+                <div class="mb-4 w-50">
+                    <label for="quantity" class="form-label fw-semibold">الكمية:</label>
+                    <input type="number" class="form-control" id="quantity" value="1" min="1" />
+                </div>
+
+                <div class="d-flex gap-3">
+                    <button type="submit" class="btn btn-primary btn-lg shadow">
+                        <i class="bi bi-cart-plus"></i> أضف إلى السلة
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-heart"></i> المفضلة
+                    </button>
+                </div>
+            </form>
+
+            <hr class="my-4">
+
+            <div>
+                <h6 class="fw-semibold">مميزات المنتج:</h6>
+                <ul class="feature-list mt-2">
+                    <li>رائحة تدوم طويلاً</li>
+                    <li>مكونات طبيعية وآمنة</li>
+                    <li>تغليف فاخر</li>
+                    <li>مثالي كهدية</li>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    function changeImage(event, src) {
-            document.getElementById('mainImage').src = src;
-            document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
-            event.target.classList.add('active');
+    document.querySelector("form").addEventListener("submit", function () {
+        document.getElementById("formQuantity").value = document.getElementById("quantity").value;
+        const selectedSmell = document.querySelector('input[name="smell"]:checked');
+        if (selectedSmell) {
+            document.getElementById("formSmellId").value = selectedSmell.value;
         }
+    });
+
+    function changeImage(event, src) {
+        document.getElementById('mainImage').src = src;
+        document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 </script>
+

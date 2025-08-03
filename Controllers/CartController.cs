@@ -47,6 +47,7 @@ namespace MVC_eCommerce_project.Controllers
                 ProductId = productId,
                 Qty = Qty,
                 UserId = currentUser.Id,
+
             };
 
             context.Add(cart);

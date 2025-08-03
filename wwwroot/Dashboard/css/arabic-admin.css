@@ -1,0 +1,322 @@
+﻿/* arabic-admin.css - ملف الأنماط للوحة التحكم العربية */
+
+/* إعدادات أساسية للغة العربية */
+* {
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+body {
+    direction: rtl !important;
+    text-align: right !important;
+}
+
+/* تحسينات الشريط الجانبي */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 6.5rem;
+    height: 100vh;
+    z-index: 1050;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+}
+
+.sidebar.toggled {
+    width: 14rem;
+}
+
+.sidebar .nav-item {
+    position: relative;
+}
+
+.sidebar .nav-item .nav-link {
+    text-align: right;
+    padding: 0.75rem 1rem;
+    width: 6.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    transition: all 0.3s;
+}
+
+.sidebar.toggled .nav-item .nav-link {
+    width: 14rem;
+    text-align: right;
+}
+
+.sidebar .nav-item .nav-link:hover {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0.35rem;
+}
+
+.sidebar .nav-item .nav-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 0.35rem;
+}
+
+.sidebar .nav-item .nav-link i {
+    font-size: 0.85rem;
+    margin-left: 0.25rem;
+    margin-right: 0;
+}
+
+.sidebar .nav-item .nav-link span {
+    font-size: 0.85rem;
+    display: none;
+    font-weight: 600;
+}
+
+.sidebar.toggled .nav-item .nav-link span {
+    display: inline;
+}
+
+/* العلامة التجارية */
+.sidebar .sidebar-brand {
+    height: 4.375rem;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sidebar .sidebar-brand .sidebar-brand-icon i {
+    font-size: 2rem;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar .sidebar-brand .sidebar-brand-text {
+    display: none;
+}
+
+.sidebar.toggled .sidebar-brand .sidebar-brand-text {
+    display: block;
+}
+
+/* الفواصل */
+.sidebar .sidebar-divider {
+    margin: 0 1rem 1rem;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* عناوين الأقسام */
+.sidebar .sidebar-heading {
+    padding: 0 1rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    display: none;
+}
+
+.sidebar.toggled .sidebar-heading {
+    display: block;
+}
+
+/* زر التبديل */
+#sidebarToggle {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none !important;
+    border-radius: 50%;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+#sidebarToggle:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* بطاقة الشريط الجانبي */
+.sidebar .sidebar-card {
+    flex-direction: column;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 0.35rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    display: none !important;
+}
+
+.sidebar.toggled .sidebar-card {
+    display: flex !important;
+}
+
+/* منطقة المحتوى */
+#content-wrapper {
+    margin-right: 6.5rem;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar.toggled ~ #content-wrapper {
+    margin-right: 14rem;
+}
+
+/* القوائم المنسدلة */
+.collapse-inner {
+    direction: rtl;
+    text-align: right;
+}
+
+.collapse-item {
+    color: #3a3b45;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1rem;
+    border-radius: 0.35rem;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.collapse-item:hover {
+    color: #5a5c69;
+    background-color: #eaecf4;
+    text-decoration: none;
+}
+
+.collapse-header {
+    margin: 0;
+    color: #6c757d;
+    font-weight: 800;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    padding: 0.5rem 1rem;
+}
+
+.collapse-divider {
+    border-top: 1px solid #eaecf4;
+    margin: 0.5rem 0;
+}
+
+/* النموذج المنبثق */
+.modal-header,
+.modal-footer {
+    direction: rtl;
+}
+
+.modal-header .close {
+    margin: -1rem -1rem -1rem auto;
+}
+
+.modal-footer {
+    justify-content: flex-start;
+}
+
+/* التذييل */
+.sticky-footer {
+    direction: rtl;
+    text-align: center;
+}
+
+/* زر العودة للأعلى */
+.scroll-to-top {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(90, 92, 105, 0.5);
+    line-height: 46px;
+    border-radius: 100%;
+    text-decoration: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+}
+
+.scroll-to-top:hover {
+    background: rgba(90, 92, 105, 0.9);
+    color: #fff;
+    text-decoration: none;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* استجابة للشاشات الصغيرة */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 6.5rem;
+    }
+    
+    .sidebar.toggled {
+        width: 100%;
+        z-index: 1051;
+    }
+    
+    #content-wrapper {
+        margin-right: 6.5rem;
+    }
+    
+    .sidebar.toggled ~ #content-wrapper {
+        margin-right: 0;
+    }
+}
+
+/* تحسينات إضافية للنصوص العربية */
+.sidebar .nav-link span,
+.sidebar-brand-text,
+.sidebar-heading,
+.collapse-header,
+.collapse-item {
+    font-weight: 600;
+    letter-spacing: 0.02rem;
+}
+
+/* ألوان مخصصة للتدرج */
+.bg-gradient-primary {
+    background: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
+    background-size: cover;
+}
+
+/* تحسين مظهر الأيقونات */
+.sidebar .nav-link i {
+    width: 1rem;
+    text-align: center;
+}
+
+/* تأثيرات الحركة */
+.sidebar .nav-link,
+.collapse-item,
+#sidebarToggle {
+    transition: all 0.15s ease-in-out;
+}
+
+/* تحسين مظهر الشريط الجانبي عند التوسيع */
+.sidebar.toggled .nav-link {
+    justify-content: flex-start;
+}
+
+.sidebar.toggled .nav-link i {
+    margin-left: 0.5rem;
+}
+
+/* ظلال وتأثيرات بصرية */
+.sidebar {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}

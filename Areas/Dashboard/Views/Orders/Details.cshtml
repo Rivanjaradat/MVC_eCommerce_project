@@ -67,6 +67,12 @@
                         <th>
                             @Html.DisplayNameFor(model => model.orderProducts.FirstOrDefault().Qty)
                         </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderProducts.FirstOrDefault().Product.Smells.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.orderProducts.FirstOrDefault().Product.Size)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
@@ -86,6 +92,12 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Qty)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Smells.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Size)
                             </td>
                         </tr>
                     }
