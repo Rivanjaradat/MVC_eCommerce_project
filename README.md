@@ -5,3 +5,5 @@ dashboard for full control.
 ![Capture](https://github.com/user-attachments/assets/43444830-0c57-4fee-8e5a-3b95198d1f84)
 ![Captur5e](https://github.com/user-attachments/assets/34354c7d-1925-44c9-9fb9-e29e6089b1c3)
 ![1](https://github.com/user-attachments/assets/81c98121-82f2-43de-85f8-d116592e1bd6)
+
+![Ca2pture](https://github.com/user-attachments/assets/e415ade6-c16c-4822-84b0-def09d9590b0)
