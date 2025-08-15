@@ -51,8 +51,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         }
 
         // POST: Dashboard/FeaturedSections/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(FeaturedSection featuredSection, IFormFile Image)
@@ -99,8 +98,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         }
 
         // POST: Dashboard/FeaturedSections/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Image,ButtonText,ButtonLink,IsActive")] FeaturedSection featuredSection)
