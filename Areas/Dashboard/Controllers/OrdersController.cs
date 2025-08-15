@@ -60,8 +60,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         }
 
         // POST: Dashboard/Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserId,AddressId,CreatedAt,Status,Amount")] Order order)
@@ -96,8 +95,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         }
 
         // POST: Dashboard/Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,AddressId,CreatedAt,Status,Amount")] Order order)
