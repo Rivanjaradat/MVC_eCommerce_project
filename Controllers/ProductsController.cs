@@ -8,9 +8,9 @@ namespace MVC_eCommerce_project.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext context; // Change to ApplicationDbContext
+        private readonly ApplicationDbContext context; 
 
-        public ProductsController(ApplicationDbContext context) // Change to ApplicationDbContext
+        public ProductsController(ApplicationDbContext context)
         {
           
             this.context = context;
@@ -74,7 +74,7 @@ namespace MVC_eCommerce_project.Controllers
             var category = await context.Categories.FindAsync(categoryId);
             ViewBag.CategoryName = category?.Name;
 
-            return View(products); // View باسم ByCategory.cshtml
+            return View(products); 
         }
     }
 }
