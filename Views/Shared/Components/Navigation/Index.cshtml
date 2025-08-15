@@ -2,12 +2,11 @@
     <div class="container justify-content-between g-4">
     
 
-        <!-- زر القائمة المنسدلة للأجهزة الصغيرة -->
         <button class="navbar-toggler order-md-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- روابط القائمة الرئيسية -->
+   
         <div class="collapse navbar-collapse order-md-1" id="navbarNav">
             <ul class="navbar-nav main-nav">
                 <li class="nav-item">
@@ -22,7 +21,7 @@
             </ul>
         </div>
 
-        <!-- العناصر على اليسار: سلة التسوق، المفضلة، تسجيل الدخول -->
+  
         <div class="d-flex align-items-center gap-4 order-md-3">
             <div class="item d-flex align-items-center">
                 <form asp-controller="Cart" asp-action="Index" class="d-flex">
@@ -52,10 +51,10 @@
 </nav>
 
 <style>
-    /* تنسيق القائمة الرئيسية */
+ 
     .navbar-nav.main-nav {
         display: flex;
-        gap: 30px; /* مسافة أكبر بين الأقسام */
+        gap: 30px;
     }
 
     .nav-item {
@@ -71,10 +70,10 @@
     }
 
         .nav-link:hover {
-            color: #28a745 !important; /* لون التمييز عند المرور */
+            color: #28a745 !important; 
         }
 
-        /* إضافة خط تحت القسم عند المرور عليه */
+
         .nav-link::after {
             content: '';
             position: absolute;
