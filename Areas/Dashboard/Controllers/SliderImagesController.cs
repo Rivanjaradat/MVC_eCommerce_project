@@ -50,10 +50,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
             return View();
         }
 
-        // Fix for the error CS1061: 'SliderImage' does not contain a definition for 'CopyToAsync'  
-        // The issue is that the `CopyToAsync` method is being called on the `sliderImage` object,  
-        // which is of type `SliderImage`. However, `CopyToAsync` is a method of `IFormFile`,  
-        // and the correct object to call it on is the `Image` parameter.  
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -105,8 +102,7 @@ namespace MVC_eCommerce_project.Areas.Dashboard.Controllers
         }
 
         // POST: Dashboard/SliderImages/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+    
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,Image")] SliderImage sliderImage)
