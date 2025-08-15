@@ -11,13 +11,13 @@
         <li class="nav-item">
             <div class="dropdown">
                 <button class="btn btn-link text-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-regular fa-circle-user"></i> <!-- أيقونة بدون خلفية -->
+                    <i class="fa-regular fa-circle-user"></i>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">حسابي</a></li>
                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">تسجيل خروج</a></li>
                     <li><a class="dropdown-item" asp-controller="Order" asp-action="Index">الطلبات</a></li>
-                    <!-- رابط للأوامر -->
+                  
                 </ul>
             </div>
         </li>
@@ -36,15 +36,15 @@
     }
 </ul>
 @section styles {
-    /* إزالة الخلفية من الأيقونة */
+ 
 .dropdown-toggle {
     background: transparent !important;
-    border: none; /* إزالة الحدود حول الأيقونة */
-    padding: 0; /* إزالة المسافات حول الأيقونة */
-    font-size: 1.5rem; /* تكبير حجم الأيقونة */
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
 }
 
-/* تنسيق لقائمة dropdown عند تسجيل الدخول */
+
 .dropdown-menu {
     width: 200px;
     text-align: center;
@@ -54,7 +54,7 @@
     font-weight: 500;
 }
 
-/* تغيير اللون عند مرور الماوس على العنصر */
+
 .dropdown-item:hover {
     background-color: #f1f1f1;
 }
