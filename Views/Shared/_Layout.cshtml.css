@@ -28,9 +28,9 @@ a {
 
 .icon {
     display: flex;
-    gap: 20px; /* مسافة بين العناصر */
+    gap: 20px; 
     align-items: center;
-    margin: 0 30px; /* مسافة من اليمين واليسار */
+    margin: 0 30px; 
 }
 
     .icon .item {
@@ -53,7 +53,7 @@ a {
     }
 
         .icon a:hover {
-            color: #1b6ec2; /* لون عند التمرير */
+            color: #1b6ec2; 
         }
 
 .search-container {
