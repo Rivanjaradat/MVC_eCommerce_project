@@ -28,7 +28,7 @@ namespace MVC_eCommerce_project.Controllers
 
             var cart = await context.Carts
                 .Where(c => c.UserId == currentUser.Id)
-                .Include(c => c.Product) // عشان نقدر نستخدم سعر المنتج
+                .Include(c => c.Product) 
                 .ToListAsync();
 
             return View(cart);
@@ -82,7 +82,7 @@ namespace MVC_eCommerce_project.Controllers
             cartItem.Qty = quantity;
             await context.SaveChangesAsync();
 
-            return Ok(); // نرجع OK بدون Redirect
+            return Ok(); 
         }
     }
 }
